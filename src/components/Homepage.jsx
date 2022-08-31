@@ -1,22 +1,17 @@
-import React from "react";
-import millify from "millify";
-import { Typography, Row, Col, Statistic } from "antd";
-import { Link } from "react-router-dom";
-import { useGetCoinsQuery } from "../services/cryptoCoinsApi";
+import React from 'react'
+import millify from 'millify'
+import { Typography, Row, Col, Statistic } from 'antd'
+import { Link } from 'react-router-dom'
+import { useGetCoinsQuery } from '../services/cryptoCoinsApi'
+import { Cryptocurencies, News } from '../components'
 
-const { Title } = Typography;
+const { Title } = Typography
 
 const Homepage = () => {
-  const { data, isFetching } = useGetCoinsQuery();
-  const globalStats = data?.data.stats;
-  const coins = data?.data.coins;
+  const { data, isFetching } = useGetCoinsQuery(10)
+  const globalStats = data?.data?.stats
 
-  const key = process.env.REACT_APP_RAPID_KEY;
-  // console.log(globalStats);
-  // console.log(coins);
-  console.log(key);
-
-  if (isFetching) return "Loading...";
+  if (isFetching) return 'Loading...'
   return (
     <>
       <Title level={2} className='heading'>
@@ -55,10 +50,26 @@ const Homepage = () => {
         </Col>
       </Row>
       <div className='home-heading-container'>
-        <Title level={2} className='home-title'></Title>
+        <Title level={2} className='home-title'>
+          Top 10 Cryptocurrencies in the world
+        </Title>
+        <Title level={2} className='show-more'>
+          <Link to='/cryptocurrencies'>Show More</Link>
+        </Title>
       </div>
-    </>
-  );
-};
 
-export default Homepage;
+      <Cryptocurencies simplified />
+      <div className='home-heading-container'>
+        <Title level={2} className='home-title'>
+          Latest Crypto News
+        </Title>
+        <Title level={2} className='show-more'>
+          <Link to='/news'>Show More</Link>
+        </Title>
+      </div>
+      <News simplified />
+    </>
+  )
+}
+
+export default Homepage
