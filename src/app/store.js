@@ -6,10 +6,10 @@ export default configureStore({
   reducer: {
     [cryptoCoins.reducerPath]: cryptoCoins.reducer,
     [cryptoNewsApi.reducerPath]: cryptoNewsApi.reducer,
-    // [useFetchBreedQuery.reducerPath]: useFetchBreedQuery.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(
-      cryptoCoins.middleware
+      cryptoCoins.middleware,
+      cryptoNewsApi.middleware
     ),
 })
