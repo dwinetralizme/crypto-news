@@ -8,10 +8,18 @@ import {
   PointElement,
   LinearScale,
   CategoryScale,
+  Tooltip,
   Title as Title2,
 } from "chart.js";
 
-ChartJS.register(LineElement, PointElement, LinearScale, Title2, CategoryScale);
+ChartJS.register(
+  LineElement,
+  PointElement,
+  LinearScale,
+  Title2,
+  CategoryScale,
+  Tooltip
+);
 
 const { Title } = Typography;
 
@@ -19,36 +27,24 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
   const coinPrice = [];
   const coinTimeStamp = [];
 
-  coinHistory?.data?.history?.map((historyData) => {
+  coinHistory?.data?.history?.map((historyData, index) => {
     coinPrice.push(historyData?.price);
     coinTimeStamp.push(
       new Date(historyData?.timestamp * 1000).toLocaleDateString()
     );
+    // }
   });
 
-  console.log(coinTimeStamp);
-  console.log(coinPrice);
-
-  const data = {
-    labels: coinTimeStamp,
-    datasets: {
-      label: "Price in USD",
-      data: coinPrice,
-      fill: false,
-      backgroundColor: "#0071bd",
-      borderColor: "#0071bd",
-    },
-  };
-
   const options = {
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: coinName + " Line Chart",
+      },
     },
   };
 
@@ -67,27 +63,22 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
           </Title>
         </Col>
       </Row>
-      {/* <Line data={dt} /> */}
       <Line
+        options={options}
         datasetIdKey="id"
         data={{
-          labels: ["Jun", "Jul", "Aug"],
+          labels: coinTimeStamp,
           datasets: [
             {
               id: 1,
               label: "",
-              data: [5, 6, 7],
-            },
-            {
-              id: 2,
-              label: "",
-              data: [3, 2, 1],
+              data: coinPrice,
+              backgroundColor: "#0071bd",
+              borderColor: "#0071bd",
             },
           ],
         }}
       />
-
-      {/* <Line options={options} data={data} /> */}
     </>
   );
 };
