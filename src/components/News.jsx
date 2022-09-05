@@ -68,9 +68,7 @@ const News = ({ simplified }) => {
                   />
                 </div>
                 <p>
-                  {news.description > 100
-                    ? `${news.description.substring(0, 100)}...`
-                    : news.description}
+                  {news?.description.substring(0, 100)}...
                 </p>
                 <div className='provider-container'>
                   <Avatar
