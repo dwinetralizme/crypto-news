@@ -10,6 +10,7 @@ import {
   CategoryScale,
   Tooltip,
   Title as Title2,
+  Legend,
 } from "chart.js";
 
 ChartJS.register(
@@ -18,7 +19,8 @@ ChartJS.register(
   LinearScale,
   Title2,
   CategoryScale,
-  Tooltip
+  Tooltip,
+  Legend
 );
 
 const { Title } = Typography;
@@ -43,7 +45,7 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
       },
       title: {
         display: true,
-        text: coinName + " Line Chart",
+        text: coinName + " Price in USD",
       },
     },
   };
