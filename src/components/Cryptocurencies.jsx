@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Card, Row, Col, Input } from "antd";
 
 import { useGetCoinsQuery } from "../services/cryptoCoinsApi";
+import Loader from "./Loader";
 
 const Cryptocurencies = ({ simplified }) => {
   const count = simplified ? 10 : 30;
@@ -21,7 +22,7 @@ const Cryptocurencies = ({ simplified }) => {
     setCryptos(filteredData);
   }, [cryptoList, searchTerm]);
 
-  if (isFetching) return "Loading...";
+  if (isFetching) return <Loader />;
 
   return (
     <>

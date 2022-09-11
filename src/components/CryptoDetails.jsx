@@ -22,6 +22,7 @@ import {
   useGetCoinByUuidQuery,
   useGetCoinHistoryQuery,
 } from "../services/cryptoCoinsApi";
+import Loader from "./Loader";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -34,7 +35,7 @@ const CryptoDetails = () => {
   const { data: coinHistory } = useGetCoinHistoryQuery({ coinId, timePeriode });
   const cryptoDetails = data?.data?.coin;
 
-  if (isFetching) return "Loading ...";
+  if (isFetching) return <Loader />;
 
   //SyntaxError: Identifier directly after number: This means you aren't allowed to start a variable name with a digit
   // 24hVolume key name from api

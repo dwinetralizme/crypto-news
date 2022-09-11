@@ -30,6 +30,9 @@ export const cryptoCoins = createApi({
           `/coin/${coinId}/history?timePeriod=${timePeriode}&referenceCurrencyUuid=yhjMzLPhuIDl`
         ),
     }),
+    getCoinExchanges: builder.query({
+      query: () => createRequest("/coin/Qwsogvtv82FCd/exchanges"),
+    }),
   }),
 });
 
@@ -37,4 +40,5 @@ export const {
   useGetCoinsQuery,
   useGetCoinByUuidQuery,
   useGetCoinHistoryQuery,
+  useGetCoinExchangesQuery,
 } = cryptoCoins;
